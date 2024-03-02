@@ -1,0 +1,166 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+#telephone_pic, #email{
+    width: 20px;
+    height: 20px;
+}
+
+section {
+    padding: 20px;
+}
+
+footer {
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    clear: both;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#degree {
+    background-color: #f8f9fa;
+}
+
+#offer {
+    background-color: #f8f9fa;
+}
+
+h2 {
+    color: #007bff;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.cv-button {
+    background-color: #28a745; /* Green */
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cv-button:hover {
+    background-color: #218838;
+}
+
+.childHeader{
+    font-size: xx-large;
+    font: bolder;
+    text-transform: capitalize;
+}
+
+
+header {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+nav ul a:hover {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul a {
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+#projects {
+    display: flex;
+    gap: 20px; 
+    overflow-x: auto; 
+    padding: 20px;
+}
+
+.project_wrapper {
+    display: flex;
+}
+
+.project_display {
+    background-color: #555;
+    border: thin solid white;
+    padding: 2%;
+    border-radius: 8%;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.project_title {
+    color: black;
+}
+
+.projectImg {
+    width: 100%;
+    height: auto;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: 300;
+}
+
+#gradPic{
+    width: 50%;
+    float: right;
+}
