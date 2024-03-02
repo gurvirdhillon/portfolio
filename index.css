@@ -6,6 +6,11 @@ body {
     padding: 0;
 }
 
+#gurvirsTitle{
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
 
 #telephone_pic, #email{
     width: 20px;
@@ -47,10 +52,6 @@ footer {
 
 #offer {
     background-color: #f8f9fa;
-}
-
-h2 {
-    color: #007bff;
 }
 
 p {
@@ -163,4 +164,33 @@ a{
 #gradPic{
     width: 50%;
     float: right;
+}
+
+.formInputTextBox{
+    
+}
+
+#emailInput{
+    width: 20%;
+}
+
+#queryMsg{
+    width: 30%;
+    padding-bottom: 5%;
+}
+
+.companyLogo{
+    height: 10%;
+}
+
+#CMPLogo, #birdLogo{
+    height: 5em;
+}
+
+footer{
+    background-color: white;
+}
+
+#tandcs{
+    color: black;
 }

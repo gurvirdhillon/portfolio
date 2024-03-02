@@ -1,3 +1,4 @@
+// allows the phone number to be called when the picture icon is clicked
 document.addEventListener("DOMContentLoaded", function() {
     const telephoneLink = document.getElementById("telephone_link");
     const telephonePic = document.getElementById("telephone_pic");
@@ -9,13 +10,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     const emailLink = document.getElementById("");
-//     const emailPic = document.getElementById("");
-//     const email = "gurvirsinghdhillon@outlook.com";
+// once the form is filled it will send the email to my inbox with the "Query"
 
-//     emailPic.addEventListener("click", function(event) {
-//         event.preventDefault();
-//         emailLink.href = "tel:" + phoneNumber;
-//     });
-// });
+function retrieveMsg() {
+    const firstName = document.querySelector('#formFirstName');
+    const secondName = document.querySelector('#formSecondName');
+    const email = document.querySelector('#emailInput');
+    const query = document.querySelector('#queryMsg');
+}
+
+const sendBtn = document.querySelector('#submitBtn');
+sendBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    alert("button has been clicked");
+})
