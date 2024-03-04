@@ -6,12 +6,30 @@ body {
     padding: 0;
 }
 
-#gurvirsTitle{
+#gurvirsTitle {
     display: flex;
     justify-content: center;
-    color: blue;
-}
-
+    font-size: 48px; /* Default font size */
+    font-weight: bold; /* Make the text bold */
+    color: #fff; /* Light color for visibility on dark background */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 2px; /* Add some letter spacing for clarity */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle shadow effect */
+    margin-bottom: 20px; /* Add some space below the title */
+  }
+  
+  @media screen and (max-width: 768px) {
+    #gurvirsTitle {
+      font-size: 36px; /* Adjust font size for smaller screens */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    #gurvirsTitle {
+      font-size: 24px; /* Further adjust font size for even smaller screens */
+    }
+  }
+    
 #telephone_pic, #email{
     width: 20px;
     height: 20px;
@@ -72,11 +90,11 @@ p {
     background-color: #218838;
 }
 
-.childHeader{
+/* .childHeader{
     font-size: xx-large;
     font: bolder;
     text-transform: capitalize;
-}
+} */
 
 
 header {
@@ -125,7 +143,7 @@ nav ul a:hover {
     }
 }
 
-.projects {
+/* .projects {
     display: flex;
     gap: 20px; 
     overflow-x: auto; 
@@ -153,7 +171,7 @@ nav ul a:hover {
 .projectImg {
     width: 100%;
     height: auto;
-}
+} */
 
 a{
     text-decoration: none;
@@ -210,3 +228,69 @@ footer{
 #tandcs{
     color: black;
 }
+
+/* decorated stuff */
+
+#work {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .childHeader {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+  }
+  
+  .project_display {
+    margin: 20px;
+    width: 250px;
+  }
+  
+  .project_display a {
+    text-decoration: none;
+    color: white; /* Change text color to white */
+  }
+  
+  .project_display img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project_display .project_title {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white; /* Change text color to white */
+  }
+  
+  .project_display .status {
+    color: gray;
+    margin-top: 5px;
+    color: white; /* Change text color to white */
+  }
+  
+  /* Adjust video size */
+  .project_display iframe {
+    width: 100%;
+    height: 200px; /* Adjust the height as needed */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .projects {
+      justify-content: space-around;
+    }
+  
+    .project_display {
+      width: 250px;
+    }
+  }
+  
