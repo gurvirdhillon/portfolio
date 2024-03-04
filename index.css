@@ -166,17 +166,33 @@ a{
     float: right;
 }
 
-.formInputTextBox{
-    
-}
-
-#emailInput{
+/* #emailInput{
     width: 20%;
 }
 
 #queryMsg{
     width: 30%;
     padding-bottom: 5%;
+} */
+
+#emailInput {
+    width: 20%;
+}
+
+#queryMsg {
+    width: 30%;
+    padding-bottom: 5%;
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 768px) {
+    #emailInput {
+        width: 50%; /* Adjust the width for smaller screens */
+    }
+
+    #queryMsg {
+        width: 70%; /* Adjust the width for smaller screens */
+    }
 }
 
 .companyLogo{
