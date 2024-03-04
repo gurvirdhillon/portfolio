@@ -15,5 +15,16 @@
     "nodemailer": "^6.9.11",
     "nodemon": "^3.1.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-portsoc": "^1.0.1"
+  },
+  "eslintConfig": {
+    "extends": "portsoc",
+    "root": true,
+    "env": {
+      "browser": true
+    }
   }
 }

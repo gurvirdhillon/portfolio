@@ -14,33 +14,33 @@ app.use(express.static((path.join, __dirname, 'pdf_docs')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(port, function () {
-    console.log('please search localhost:', port, 'on the browser to continue.');
+  console.log('please search localhost:', port, 'on the browser to continue.');
 });
 
 app.post('/send-email', (req, res) => {
-    const { firstName, lastName, email, phone, query } = req.body;
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'gurvirdhillon2002@gmail.com',
-            pass: `Sohi1964`
-        }
-    });
+  const { firstName, lastName, email, phone, query } = req.body;
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'gurvirdhillon2002@gmail.com',
+      pass: 'Sohi1964',
+    },
+  });
 
-    const mailOptions = {
-        from: 'gurvirsinghdhillon@outlook.com',
-        to: 'gurvirdhillon2002@gmail.com',
-        subject: 'New Query',
-        text: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nPhone: ${phone}\nQuery: ${query}`
-    };
+  const mailOptions = {
+    from: 'gurvirsinghdhillon@outlook.com',
+    to: 'gurvirdhillon2002@gmail.com',
+    subject: 'New Query',
+    text: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nPhone: ${phone}\nQuery: ${query}`,
+  };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send('Error sending email');
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.send('Email sent successfully');
-        }
-    });
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send('Email sent successfully');
+    }
+  });
 });
