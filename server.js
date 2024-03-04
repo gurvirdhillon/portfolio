@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const staticPath = path.join(__dirname);
 
 app.use(express.static(staticPath));
+app.use(express.static((path.join, __dirname, 'img')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
