@@ -23,14 +23,14 @@ app.post('/send-email', (req, res) => {
     service: 'gmail',
     auth: {
       user: 'gurvirdhillon2002@gmail.com',
-      pass: 'Sohi1964',
+      pass: 'cwur lqcw xdec ayre',
     },
   });
 
   const mailOptions = {
     from: 'gurvirsinghdhillon@outlook.com',
     to: 'gurvirdhillon2002@gmail.com',
-    subject: 'New Query',
+    subject: 'Website email',
     text: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nPhone: ${phone}\nQuery: ${query}`,
   };
 
@@ -40,7 +40,7 @@ app.post('/send-email', (req, res) => {
       res.status(500).send('Error sending email');
     } else {
       console.log('Email sent: ' + info.response);
-      res.send('Email sent successfully');
+      res.send('<script>alert("Email sent"); window.location.href = "/";</script>');
     }
   });
 });
