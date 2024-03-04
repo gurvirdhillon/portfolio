@@ -12,7 +12,7 @@
         <h1 id="gurvirsTitle">Gurvir Dhillon</h1>
         <nav>
             <ul><a href="#about">About Me</a></ul>
-            <ul><a href="#projects">Work</a></ul>
+            <ul><a href="#work">Work</a></ul>
             <ul><a href="#achieve">Achievements</a></ul>
             <ul><a href="cv.pdf" target="_blank">CV</a></ul>
             <ul><a href="#enquiry">Enquiries</a></ul>
@@ -41,8 +41,9 @@
         </div>
     </section>
 
+    <section id="work">
     <h1 class="childHeader">WORK</h1>
-    <section id="projects">
+    <section class="projects">
         <div class="project_wrapper">
             <div class="project_display">
                 <a href="https://github.com/gurvirdhillon/AAL-project" target="_blank">
@@ -79,10 +80,21 @@
         </a>
     </div>
 
-<br>
+</section>
 
-    </section>
-    
+<section class="projects">
+
+<div class="project_display">
+    <a href="addictive software.pdf" target="_blank">
+        <img src="addictive_software_teaser.png" alt="addictive software" class="projectImg">
+        <div class="">Addictive software facts and statistics</div>
+    </div>
+    </a>
+</div>
+
+</section>
+</section>    
+
     <section id="achieve">
         <h1 class="childHeader">ACHIEVEMENTS</h1>
         <img src="grad_pic.jpg" alt="" id="gradPic">
@@ -101,9 +113,9 @@
 
 <section>
     <h2 id="enquiry">ENQUIRIES</h2>
-    <form>
+    <form action="/send-email" method="post">
         <p>First name: </p>
-        <input type="" placeholder="first name" class="formInputTextBox" id="formFirstName" required>
+        <input type="" placeholder="first name" class="formInputTextBox" id="formFirstName" name="firstName" required>
         <p>Last name: </p>
         <input type="" placeholder="last name" class="formInputTextBox" id="formSecondName">
         <p>Email Address: </p>
@@ -112,7 +124,7 @@
         <input type="" class="formInputTextBox" id="phone" placeholder="+447_______">
         <p>Query: </p>
         <input type="text" class="formInputTextBox" id="queryMsg" placeholder="Hi Gurvir, I wanted to find out about..." required>
-        <button type="submit" id="submitBtn">Submit</button>
+        <button id="submitBtn">Submit</button>
     </form>
 </section>
 

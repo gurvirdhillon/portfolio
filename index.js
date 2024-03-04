@@ -23,4 +23,4 @@ const sendBtn = document.querySelector('#submitBtn');
 sendBtn.addEventListener('click', (event) => {
     event.preventDefault();
     alert("button has been clicked");
-})
+});

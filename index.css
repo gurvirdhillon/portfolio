@@ -125,7 +125,7 @@ nav ul a:hover {
     }
 }
 
-#projects {
+.projects {
     display: flex;
     gap: 20px; 
     overflow-x: auto; 
