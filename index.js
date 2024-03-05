@@ -9,3 +9,23 @@ document.addEventListener('DOMContentLoaded', function () {
     telephoneLink.href = 'tel:' + phoneNumber;
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const getBirdie = document.querySelector('#birdLogo');
+  getBirdie.addEventListener('click', () => {
+    const modal = document.getElementById('myModal');
+    const span = document.getElementsByClassName('close')[0];
+
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+      modal.style.display = 'none';
+    };
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+  });
+});
