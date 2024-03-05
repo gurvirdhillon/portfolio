@@ -8,13 +8,14 @@ const bodyParser = require('body-parser');
 const staticPath = path.join(__dirname);
 
 app.use(express.static(staticPath));
-app.use(express.static((path.join, __dirname, 'img')));
-app.use(express.static((path.join, __dirname, 'pdf_docs')));
+app.use(express.static(path.join(__dirname, 'img')));
+app.use(express.static(path.join(__dirname, 'pdf_docs')));
 
+// Add middleware to parse request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(port, function () {
-  console.log('please search localhost:', port, 'on the browser to continue.');
+  console.log('Please visit http://localhost:' + port + ' to continue.');
 });
 
 app.post('/send-email', (req, res) => {

@@ -110,23 +110,22 @@
         </div>
     </section>
 
-<section>
-    <h2 id="enquiry">ENQUIRIES</h2>
-    <form action="/send-email" method="post">
-        <p>First name: </p>
-        <input type="" placeholder="first name" class="formInputTextBox" id="formFirstName" name="firstName" required>
-        <p>Last name: </p>
-        <input type="" placeholder="last name" class="formInputTextBox" id="formSecondName" name="lastName">
-        <p>Email Address: </p>
-        <input type="email" placeholder="email address" class="formInputTextBox" id="emailInput" name="email" required>
-        <p>Phone Number:</p>
-        <input class="formInputTextBox" id="phone" placeholder="+447_______" name="phone" type=tel pattern="[-+0-9() ]{7,}">
-        <p>Query: </p>
-        <input type="text" class="formInputTextBox" id="queryMsg" placeholder="Hi Gurvir, I wanted to find out about..." name="query" required>
-        <button id="submitBtn">Submit</button>
-    </form>
-    
-</section>
+    <section>
+        <h2 id="enquiry">ENQUIRIES</h2>
+        <form action="/send-email" method="post">
+            <p>First name: </p>
+            <input type="text" placeholder="first name" class="formInputTextBox" id="formFirstName" name="firstName" required>
+            <p>Last name: </p>
+            <input type="text" placeholder="last name" class="formInputTextBox" id="formSecondName" name="lastName">
+            <p>Email Address: </p>
+            <input type="email" placeholder="email address" class="formInputTextBox" id="emailInput" name="email" required>
+            <p>Phone Number:</p>
+            <input type="tel" class="formInputTextBox" id="phone" placeholder="+447_______" name="phone" pattern="[-+0-9() ]{7,}" required>
+            <p>Query: </p>
+            <input type="text" class="formInputTextBox" id="queryMsg" placeholder="Hi Gurvir, I wanted to find out about..." name="query" required>
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+    </section>
 
     <footer>
     <a href="https://www.commonmission.uk/" target="_blank">

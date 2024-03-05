@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// when clicking the mockingbird icon it alerts the user the link is coming soon.
+
 document.addEventListener('DOMContentLoaded', function () {
   const getBirdie = document.querySelector('#birdLogo');
   getBirdie.addEventListener('click', () => {
