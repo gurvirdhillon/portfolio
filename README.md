@@ -9,4 +9,5 @@ Furthermore, this portfolio shares information such as my education, background 
 Whether you are a potential employer, co worker or fellow developer, I invite you to explore my portfolio to discover more about my projects I have previously worked on. My details have been provided in the website under the phone icon/email icon.
 
 Happy Web Surfing!
-Gurvir
+
+- Gurvir
