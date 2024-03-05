@@ -18,7 +18,7 @@ app.listen(port, function () {
   console.log('Please visit http://localhost:' + port + ' to continue.');
 });
 
-app.post('/send-email', (req, res) => {
+app.post('/portfolio/send-email', (req, res) => {
   const { firstName, lastName, email, phone, query } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
