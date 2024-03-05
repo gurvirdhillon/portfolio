@@ -10,4 +10,4 @@ Whether you are a potential employer, co worker or fellow developer, I invite yo
 
 Happy Web Surfing!
 
-- Gurvir
+Gurvir
