@@ -4,6 +4,11 @@ const path = require('path');
 const port = 8080;
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
+require('dotenv').config();
+
+app.use(cors());
 
 const staticPath = path.join(__dirname);
 
@@ -24,7 +29,7 @@ app.post('/portfolio/send-email', (req, res) => {
     service: 'gmail',
     auth: {
       user: 'gurvirdhillon2002@gmail.com',
-      pass: 'cwur lqcw xdec ayre',
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
