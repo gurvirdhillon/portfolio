@@ -16,7 +16,6 @@ app.use(express.static(staticPath));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'pdf_docs')));
 
-// Add middleware to parse request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(port, function () {
