@@ -32,23 +32,84 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const filePath = 'updates/10-09-24.txt';
-  const preElement = document.querySelector('#content');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const filePath = 'updates/10-09-24.txt';
+//   const preElement = document.querySelector('.content');
 
-  fetch(filePath)
+//   fetch(filePath)
+//       .then(response => {
+//           if (!response.ok) {
+//               throw new Error('Network response was not ok');
+//           }
+//           return response.text();
+//       })
+//       .then(text => {
+//           preElement.textContent = text;
+//           preElement.classList = "nodeContent";
+//       })
+//       .catch(error => {
+//           console.error('There was a problem with the fetch operation:', error);
+//       });
+// });
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const filePath = 'updates/07-09-24.txt';
+//   const preElement = document.querySelector('.content');
+
+//   fetch(filePath)
+//       .then(response => {
+//           if (!response.ok) {
+//               throw new Error('Network response was not ok');
+//           }
+//           return response.text();
+//       })
+//       .then(text => {
+//           preElement.textContent = text;
+//           preElement.classList = "nodeContent";
+//       })
+//       .catch(error => {
+//           console.error('There was a problem with the fetch operation:', error);
+//       });
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Array of file paths
+  const filePaths = [
+    'updates/07-09-24.txt',
+    'updates/10-09-24.txt'
+    // Add more file paths here as needed
+  ];
+
+  const preElement = document.querySelector('.content');
+
+  // Function to fetch and display content from a file
+  const fetchAndDisplayContent = (filePath) => {
+    return fetch(filePath)
       .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.text();
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
       })
       .then(text => {
-          preElement.textContent = text;
-          preElement.classList = "nodeContent";
+        const posts = text.split('\n\n'); // Adjust the delimiter if needed
+
+        // Create and append new elements for each post
+        posts.forEach((post, index) => {
+          const postElement = document.createElement('div');
+          postElement.id = `post-${Date.now()}-${index + 1}`; // Unique ID based on timestamp and index
+          postElement.textContent = post;
+          postElement.classList.add('nodeContent');
+          preElement.appendChild(postElement);
+        });
       })
       .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
+        console.error('There was a problem with the fetch operation:', error);
       });
+  };
+
+  // Fetch content from all files
+  filePaths.forEach(filePath => fetchAndDisplayContent(filePath));
 });
 
