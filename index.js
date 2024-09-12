@@ -31,3 +31,24 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const filePath = 'updates/10-09-24.txt';
+  const preElement = document.querySelector('#content');
+
+  fetch(filePath)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.text();
+      })
+      .then(text => {
+          preElement.textContent = text;
+          preElement.classList = "nodeContent";
+      })
+      .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+      });
+});
+

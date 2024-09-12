@@ -335,3 +335,16 @@ footer{
     cursor: pointer;
   }
   
+  .updates {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: break-word; 
+    word-break: break-word; 
+    max-width: 100%;
+    box-sizing: border-box; 
+    background-color: #4169e1;
+    float: left;
+    display: block;
+}
+
+
