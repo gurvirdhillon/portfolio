@@ -217,17 +217,14 @@ a{
     height: 10%;
 }
 
-#CMPLogo, #birdLogo, #stravaLogo{
+#CMPLogo, #birdLogo{
     height: 5em;
     cursor: pointer;
 }
 
-@media (max-width: 768px){
-  #stravaLogo{
-    width: 5em;
-  }
+#stravaLogo{
+  width: 5em;
 }
-
 
 footer{
     background-color: white;
