@@ -222,6 +222,11 @@ a{
     cursor: pointer;
 }
 
+@media (max-width: 768px){
+  #stravaLogo{
+    width: 5em;
+  }
+}
 
 
 footer{
