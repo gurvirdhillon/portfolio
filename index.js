@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(text => {
         const posts = text.split('\n\n'); // Adjust the delimiter if needed
 
-        // Create and append new elements for each post
         posts.forEach((post, index) => {
           const postElement = document.createElement('div');
           postElement.id = `post-${Date.now()}-${index + 1}`; // Unique ID based on timestamp and index
@@ -72,4 +71,3 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch content from all files
   filePaths.forEach(filePath => fetchAndDisplayContent(filePath));
 });
-

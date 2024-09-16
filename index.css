@@ -184,15 +184,6 @@ a{
     float: right;
 }
 
-/* #emailInput{
-    width: 20%;
-}
-
-#queryMsg{
-    width: 30%;
-    padding-bottom: 5%;
-} */
-
 #emailInput {
     width: 20%;
 }
@@ -310,7 +301,7 @@ footer{
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: auto;
     background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
   }
   
@@ -351,16 +342,13 @@ footer{
     display: block;
 } */
 
-
-
-
 .updates {
   margin: 0 auto;
-  padding: 40px;
   float: left;
   max-width: 100%;
   box-sizing: border-box;
-  /* background-color: #fdfaf5;   */
+  overflow-wrap: break-word;
+  word-break: break-all;
   background-color: black;
   border: 1px solid #e0dcd5;
   border-radius: 10px;
@@ -382,6 +370,8 @@ footer{
 
 .nodeContent {
   background-color: black;
+  white-space: normal;
+  overflow-wrap: break-word;
   border: none;
   padding: 30px;
   margin-bottom: 40px;
@@ -393,10 +383,6 @@ footer{
 .nodeContent pre {
   background-color: #f7f5eb;
   border-left: 4px solid #b5b0a6;
-  padding: 15px;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  word-break: break-word;
   font-family: 'Courier New', monospace;
   color: #4a4a4a;
   font-size: 1em;
