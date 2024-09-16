@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Array of file paths
   const filePaths = [
     'updates/07-09-24.txt',
-    'updates/10-09-24.txt'
-    // Add more file paths here as needed
+    'updates/10-09-24.txt',
+    'updates/16-09-24.txt'
   ];
 
   const preElement = document.querySelector('.content');
@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.text();
       })
       .then(text => {
-        const posts = text.split('\n\n'); // Adjust the delimiter if needed
+        const posts = text.split('\n\n');
 
         posts.forEach((post, index) => {
           const postElement = document.createElement('div');
-          postElement.id = `post-${Date.now()}-${index + 1}`; // Unique ID based on timestamp and index
+          postElement.id = `post-${Date.now()}-${index + 1}`;
           postElement.textContent = post;
           postElement.classList.add('nodeContent');
           preElement.appendChild(postElement);
