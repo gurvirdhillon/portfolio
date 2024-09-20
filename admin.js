@@ -5,13 +5,13 @@ async function handleAdminAccess() {
         const response = await fetch('http://localhost:8080/check-password', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json' 
             },
-            body: JSON.stringify({ password: userPassword })  // Correct JSON format
+            body: JSON.stringify({ password: userPassword })
         });
 
         const result = await response.json();
-        console.log("Server response:", result); // Debugging to see the server's response
+        console.log("Server response:", result);
 
         if (result.success) {
             window.location.href = "admin.html";
@@ -24,9 +24,7 @@ async function handleAdminAccess() {
     }
 }
 
-// Wait for the DOM to fully load before attaching the event listener
 document.addEventListener('DOMContentLoaded', function () {
     const getButton = document.querySelector('#admin-rights');
     getButton.addEventListener('click', handleAdminAccess);
 });
-

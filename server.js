@@ -1,27 +1,26 @@
+require('dotenv').config();
 const express = require('express');
-const app = express();
 const path = require('path');
-const port = 8080;
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const dotenv = require('dotenv');
-
-
-require('dotenv').config();
+const app = express();
+const port = 8080;
 
 app.use(cors());
 
 const staticPath = path.join(__dirname);
-
 app.use(express.static(staticPath));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'pdf_docs')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
+// Email sending
 app.post('/portfolio/send-email', (req, res) => {
   const { firstName, lastName, email, phone, query } = req.body;
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -37,6 +36,7 @@ app.post('/portfolio/send-email', (req, res) => {
     text: `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\nPhone: ${phone}\nQuery: ${query}`,
   };
 
+  // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);
@@ -48,21 +48,21 @@ app.post('/portfolio/send-email', (req, res) => {
   });
 });
 
+// Admin password check
 app.post('/check-password', (req, res) => {
-  const { password } = req.body;  // Get the password from the request body
+  const { password } = req.body;
   console.log("Password received from client:", password);
 
   const correctPassword = process.env.ADMIN_PASSWORD;
   console.log("Correct Password:", correctPassword);
 
   if (password === correctPassword) {
-      return res.json({ success: true });
+    res.json({ success: true });
   } else {
-      return res.json({ success: false });
+    res.json({ success: false }); 
   }
 });
 
 app.listen(port, function () {
   console.log('Please visit http://localhost:' + port + ' to continue.');
 });
-
