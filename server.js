@@ -5,6 +5,8 @@ const port = 8080;
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
 
 require('dotenv').config();
 
@@ -17,10 +19,6 @@ app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'pdf_docs')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.listen(port, function () {
-  console.log('Please visit http://localhost:' + port + ' to continue.');
-});
 
 app.post('/portfolio/send-email', (req, res) => {
   const { firstName, lastName, email, phone, query } = req.body;
@@ -49,3 +47,22 @@ app.post('/portfolio/send-email', (req, res) => {
     }
   });
 });
+
+app.post('/check-password', (req, res) => {
+  const { password } = req.body;  // Get the password from the request body
+  console.log("Password received from client:", password);
+
+  const correctPassword = process.env.ADMIN_PASSWORD;
+  console.log("Correct Password:", correctPassword);
+
+  if (password === correctPassword) {
+      return res.json({ success: true });
+  } else {
+      return res.json({ success: false });
+  }
+});
+
+app.listen(port, function () {
+  console.log('Please visit http://localhost:' + port + ' to continue.');
+});
+
