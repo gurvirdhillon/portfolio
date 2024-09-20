@@ -204,9 +204,13 @@ a{
     }
 }
 
-.companyLogo{
-    height: 10%;
+.companyLogo {
+  width: 5em; 
+  height: 5em;
+  object-fit: contain; 
 }
+
+
 
 #CMPLogo, #birdLogo{
     height: 5em;
