@@ -54,7 +54,6 @@ app.post('/check-password', (req, res) => {
   console.log("Password received from client:", password);
 
   const correctPassword = process.env.ADMIN_PASSWORD;
-  console.log("Correct Password:", correctPassword);
 
   if (password === correctPassword) {
     res.json({ success: true });
