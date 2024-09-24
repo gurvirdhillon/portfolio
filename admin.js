@@ -17,6 +17,7 @@ async function handleAdminAccess() {
             window.location.href = "admin.html";
         } else {
             alert("Access Denied");
+            window.location.href = "index.html";
         }
     } catch (error) {
         console.error('Error:', error);
