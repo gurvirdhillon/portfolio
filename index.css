@@ -30,7 +30,7 @@ body {
     }
   }
     
-#telephone_pic, #email{
+#telephone_pic, #email, #github_icon{
     width: 20px;
     height: 20px;
 }
