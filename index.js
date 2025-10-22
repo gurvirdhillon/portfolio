@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const filePaths = [
     'updates/07-09-24.txt',
     'updates/10-09-24.txt',
-    'updates/25-07-25.txt'
+    'updates/25-07-25.txt',
+    'updates/20-10-25.txt'
   ];
 
   const preElement = document.querySelector('.content');
