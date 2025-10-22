@@ -51,37 +51,56 @@ footer {
     clear: both;
 }
 
+/* ===========================
+   VIDEO + HEADSHOT SPLIT
+=========================== */
 #video {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: clamp(360px, 70vh, 820px);
+  grid-template-columns: 1fr 1fr; /* 50/50 split */
+  align-items: stretch;           /* equal height columns */
+  height: 80vh;                   /* fills most of screen height */
   overflow: hidden;
+  background: #000;               /* black background behind video */
 }
 
+/* Left: YouTube video */
 .video-container {
   position: relative;
-  overflow: hidden;   
-  background: #000; 
+  width: 100%;
+  height: 100%;
+  background: #000;
 }
 
 .video-container iframe {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  width: calc(100% * 16 / 9); 
-  transform: translate(-50%, -50%);
-  border: 0;
+  border: none;
+  object-fit: cover; /* ensures it covers its half */
 }
 
+/* Right: headshot */
 .headshot-pic {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
-  object-position: 50% 10%;
+  object-fit: cover;       /* fills space while maintaining proportions */
+  object-position: 50% 10%;/* move up slightly so hair stays visible */
   display: block;
 }
 
+/* --- Laptops (adjust slightly if cropping too tight) --- */
+@media (min-width: 1024px) and (max-width: 1600px) {
+  #video {
+    height: 70vh; /* better scaling for laptops */
+  }
+
+  .headshot-pic {
+    object-position: 50% 5%; /* show a bit more top of head */
+  }
+}
+
+/* --- Tablets / Mobiles --- */
 @media (max-width: 900px) {
   #video {
     grid-template-columns: 1fr;
@@ -93,19 +112,18 @@ footer {
   }
 
   .video-container iframe {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
-    transform: none;
+    object-fit: contain; /* prevents stretching on smaller devices */
   }
 
   .headshot-pic {
+    width: 100%;
     height: auto;
-    object-position: 50% 20%;
+    object-fit: cover;
+    object-position: 50% 20%; /* focus more on face when stacked */
   }
 }
-
 
 #degree {
     background-color: #f8f9fa;
