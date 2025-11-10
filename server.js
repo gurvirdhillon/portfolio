@@ -51,7 +51,7 @@ app.post('/portfolio/send-email', (req, res) => {
 // Admin password check
 app.post('/check-password', (req, res) => {
   const { password } = req.body;
-  console.log("Password received from client:", password);
+  console.log("Password received from client.");
 
   const correctPassword = process.env.ADMIN_PASSWORD;
 
