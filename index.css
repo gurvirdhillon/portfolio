@@ -35,6 +35,11 @@ body {
     height: 20px;
 }
 
+#lm{
+  color: white;
+  font-weight: bold;
+}
+
 a[href*="github.com"] img {
   width: 20px;
   height: 20px;
