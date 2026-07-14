@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,235 +9,266 @@
     <script src="index.js"></script>
     <script src="admin.js"></script>
     <script src="last_updates.js" defer></script>
-
 </head>
 <body>
-    <header>
-        <h1 id="gurvirsTitle">Gurvir Dhillon</h1>
-        <nav>
-            <ul><a href="#about">About Me</a></ul>
-            <ul><a href="#work">Work</a></ul>
-            <ul><a href="#achieve">Achievements</a></ul>
-            <ul><a href="pdf_docs/cv.pdf" target="_blank">CV</a></ul>
-            <ul><a href="#enquiry">Enquiries</a></ul>
-            <ul><a href="#" id="telephone_link"><img src="img/telephone.jpg" id="telephone_pic" class="icon"></a></ul>
-            <ul><a href="mailto:gurvirsinghdhillon@outlook.com" id="email"><img src="img/email.jpg" id="email" class="icon"></a></ul>
-            <ul><a href="#updateMe">Updates</a></ul>
-            <ul><a href="https://github.com/gurvirdhillon" target="_blank" id="github_icon"><img src="img/github-logo.jpg" id="github_icon" class="icon"></a></ul>
-        </nav>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#video">Gurvir Dhillon</a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#achieve">Achievements</a></li>
+                    <li><a href="pdf_docs/CV.pdf" target="_blank">CV</a></li>
+                    <li><a href="#enquiry">Enquiries</a></li>
+                    <li><a href="#updateMe">Updates</a></li>
+                    <li>
+                        <a href="#" id="telephone_link" aria-label="Call Gurvir">
+                            <img src="img/telephone.jpg" id="telephone_pic" class="icon" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:gurvirsinghdhillon@outlook.com" aria-label="Email Gurvir">
+                            <img src="img/email.jpg" id="email" class="icon" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/gurvirdhillon" target="_blank" aria-label="GitHub profile">
+                            <img src="img/github-logo.jpg" id="github_icon" class="icon" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <section id="video">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Xl060LWrKvc?si=Kiovz6GaPOMRrNBR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <main>
+        <section id="video" class="hero">
+            <div class="hero-media video-container">
+                <iframe src="https://www.youtube.com/embed/Xl060LWrKvc?si=Kiovz6GaPOMRrNBR" title="Gurvir Dhillon portfolio video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <img class="headshot-pic" src="img/headshots/Gurvir-3.jpg">
+            <div class="hero-profile">
+                <img class="hero-photo" src="img/headshots/Gurvir-3.jpg" alt="Gurvir Dhillon headshot">
+                <div class="hero-copy">
+                    <p class="eyebrow">Data Engineer / Web Developer</p>
+                    <h1>Building useful data products, web applications, and applied AI experiments.</h1>
+                    <div class="hero-actions">
+                        <a class="button primary" href="#work">View Work</a>
+                        <a class="button secondary" href="pdf_docs/CV.pdf" target="_blank">Open CV</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
-    <section id="about">
-        <h1 class="childHeader">ABOUT ME</h1>
-        <div>
-            <ol>
-                <li>Data Engineer at Digital Futures</li>
-                <li>Experience in Python programming, data analytical tools such as Pandas, Numpy, Scikit-learn</li>
-                <li>Over 4 years experience in web developing using Javascript(NodeJS), familiarity with HTML and CSS</li>
-                <li>Experience in database development and management including SQL and NoSQL</li>
-                <li>Experience in visual and graphics design (3DS Max development).</li>
-                <li>Freelance web developer using HTML, CSS and JS</li>
-                <li>Founder of <a href="https://liftmetrics.onrender.com/" id="lm">Liftmetrics</a>.</li>
-            </ol>
-        </div>
-    <!-- <img src="img/headshots/Gurvir Cropped-1.jpg" class="headshot-pic"> -->
-    </section>
-
-
- <section id="work">
-    <h1 class="childHeader">WORK</h1>
-    <section class="projects">
-        <div class="project_wrapper">
-            <div class="project_display">
-                <a href="https://github.com/gurvirdhillon/AAL-project" target="_blank">
-                    <div class=""><img src="img/Screenshot_AAL.png" loading="lazy" id="aalProjectPic" class="projectImg"></div>
-                    <div>
-                        <div class="project_title">Ambient Assisted Living Project</div>
-                    </div>
-                </a>
+        <section id="about" class="content-section">
+            <div class="section-shell about-grid">
+                <div>
+                    <p class="section-kicker">About Me</p>
+                    <h2 class="section-title">A practical builder with data, software, and design experience.</h2>
+                    <ol class="credential-list">
+                        <li>Data Engineer at Digital Futures</li>
+                        <li>Experience in Python programming, data analytical tools such as Pandas, Numpy, Scikit-learn</li>
+                        <li>Over 4 years experience in web developing using Javascript(NodeJS), familiarity with HTML and CSS</li>
+                        <li>Experience in database development and management including SQL and NoSQL</li>
+                        <li>Experience in visual and graphics design (3DS Max development)</li>
+                        <li>Freelance web developer using HTML, CSS and JS</li>
+                        <li>Founder of <a href="https://liftmetrics.onrender.com/" id="lm">LiftMetrics</a></li>
+                    </ol>
+                </div>
+                <img src="img/headshots/Gurvir Cropped-1.jpg" class="about-photo" alt="Gurvir Dhillon portrait">
             </div>
-            
-            <div class="project_display">
-                <a href="https://github.com/gurvirdhillon/mockingbirdAI" target="_blank">
-                    <div class=""><img src="img/mockingbirdai.png" loading="lazy" class="projectImg"></div>
-                    <div>
-                        <div class="project_title">MockingBirdAI</div>
-                    </div>
-                </a>
-        </div>
-        
-        <div class="project_display">
-            <a href="pdf_docs/addictive software.pdf" target="_blank">
-                <img src="img/addictive_software_teaser.png" alt="addictive software" class="projectImg">
-                <div class="">Addictive software facts and statistics</div>
+        </section>
+
+        <section id="work" class="content-section">
+            <div class="section-shell">
+                <p class="section-kicker">Selected Work</p>
+                <h2 class="section-title">Projects, research, and experiments.</h2>
+                <div class="projects">
+                    <article class="project_display">
+                        <a href="https://github.com/gurvirdhillon/AAL-project" target="_blank">
+                            <img src="img/Screenshot_AAL.png" loading="lazy" id="aalProjectPic" class="projectImg" alt="Ambient Assisted Living Project">
+                            <span class="project_title">Ambient Assisted Living Project</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="https://github.com/gurvirdhillon/mockingbirdAI" target="_blank">
+                            <img src="img/mockingbirdai.png" loading="lazy" class="projectImg" alt="MockingBirdAI">
+                            <span class="project_title">MockingBirdAI</span>
+                            <span class="status">In development</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="pdf_docs/addictive software.pdf" target="_blank">
+                            <img src="img/addictive_software_teaser.png" alt="addictive software" class="projectImg">
+                            <span class="project_title">Addictive software facts and statistics</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="pdf_docs/MScThesis.pdf" target="_blank">
+                            <img src="img/MScThesis.png" alt="Masters Dissertation" class="projectImg">
+                            <span class="project_title">Masters of Science Dissertation</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="https://liftmetrics.onrender.com/" target="_blank">
+                            <img src="img/liftmetrics_ui.png" loading="lazy" class="projectImg" alt="LiftMetrics interface">
+                            <span class="project_title">LiftMetrics</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="videos/image-recognition.mp4" target="_blank">
+                            <img src="img/img_recognition.png" alt="Image recognition application">
+                            <span class="project_title">Image recognition application using AWS services</span>
+                        </a>
+                        <a class="text-link" href="https://github.com/gurvirdhillon/image-recognition-aws.git" target="_blank">GitHub Repo</a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="pdf_docs/multimodal_biometrics.pdf" target="_blank">
+                            <img src="img/multimodal_biometrics.png" alt="multimodal biometrics paper" title="Multimodal biometrics">
+                            <span class="project_title">Multimodal biometrics paper</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="https://gurvirdhillon.github.io/art_canvas/" target="_blank">
+                            <img src="img/art_canvas.png" alt="art canvas image" title="ART CANVAS!">
+                            <span class="project_title">Art Canvas!</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="pdf_docs/fyp_bachelors.pdf" target="_blank">
+                            <img src="img/fyp_img.png" alt="final year project bachelors" title="final year project bachelors">
+                            <span class="project_title">My final year project bachelors report</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="https://gurvirdhillon.github.io/todolist/" target="_blank">
+                            <img src="img/todolist.png" alt="to do image" title="to do list">
+                            <span class="project_title">To-Do list</span>
+                        </a>
+                    </article>
+
+                    <article class="project_display">
+                        <a href="https://boxing-ring-etl.streamlit.app" target="_blank">
+                            <img src="img/boxing_ring_etl.png" alt="boxing ring etl example streamlit page">
+                            <span class="project_title">Boxing Ring ETL pipeline project</span>
+                        </a>
+                    </article>
+                </div>
             </div>
-            </a>
-        </div>        
+        </section>
 
-        <div class="project_display">
-            <a href="pdf_docs/MscThesis.pdf" target="_blank">
-                <img src="img/MScThesis.png" alt="Masters Dissertation" class="projectImg">
-                <div class="">Masters of Science Dissertation</div>
+        <section id="achieve" class="content-section">
+            <div class="section-shell achievement-grid">
+                <img src="img/grad_pic.jpg" alt="graduate picture" id="gradPic">
+                <div>
+                    <p class="section-kicker">Achievements</p>
+                    <h2 class="section-title">Academic, professional, and community milestones.</h2>
+                    <ul class="achievement-list">
+                        <li>Upper Second achieved in a Bachelors degree in Software Engineering at the University of Portsmouth.</li>
+                        <li>Master's degree in Artificial Intelligence at Royal Holloway University of London.</li>
+                        <li>Explored research into generative modelling and clustering techniques to uncover patterns in highly complex datasets.</li>
+                        <li>ATLAS approved course in NoSQL development.</li>
+                        <li>Alumni of the common missions project scheme (Hacking4MOD), previously working alongside the Royal Navy on a MoD challenge.</li>
+                        <li>Guest speaker at the ACCU conference 2023.</li>
+                        <li>Tutored students aged 8-10 years old in beginner-level coding.</li>
+                        <li>Freelance web developer with over 4 years experience in software development.</li>
+                    </ul>
+                </div>
             </div>
-            </a>
-        </div>        
+        </section>
 
-        <div class="project_display">
-        <a href="videos/image-recognition.mp4" target="_blank">
-            <img src="img/img_recognition.png">
-            <div class="">Image recognition application using AWS services</div>
-            <a href="https://github.com/gurvirdhillon/image-recognition-aws.git">Github Repo</a>
-        </div>
-        </a>
-    </div>
+        <section id="skills" class="content-section compact-section">
+            <ul id="skills-gained"></ul>
+        </section>
 
-    <div class="project_display">
-        <a href="pdf_docs/multimodal_biometrics.pdf" target="_blank">
-            <img src="img/multimodal_biometrics.png" alt="multimodal biometrics paper" title="Multimodal biometrics">
-            <div class="">Multimodal biometrics paper</div>
-        </div>
-        </a>
-    </div>
+        <section class="content-section contact-section">
+            <div class="section-shell contact-grid">
+                <div>
+                    <p class="section-kicker">Enquiries</p>
+                    <h2 id="enquiry" class="section-title">Start a conversation.</h2>
+                    <p class="section-copy">Share a project, opportunity, or question and Gurvir will get back to you.</p>
+                </div>
+                <form class="contact-form" action="/portfolio/send-email" method="post">
+                    <label for="formFirstName">First name</label>
+                    <input type="text" placeholder="First name" class="formInputTextBox" id="formFirstName" name="firstName" required>
 
-    <div class="project_display">
-        <a href="https://liftmetrics.onrender.com/" target="_blank">
-            <div class=""><img src="img/liftmetrics_ui.png" loading="lazy" class="projectImg"></div>
-            <div>
-                <div class="project_title">LiftMetrics</div>
-                <div class="status">Status: In development</div>
+                    <label for="formSecondName">Last name</label>
+                    <input type="text" placeholder="Last name" class="formInputTextBox" id="formSecondName" name="lastName">
+
+                    <label for="emailInput">Email address</label>
+                    <input type="email" placeholder="name@example.com" class="formInputTextBox" id="emailInput" name="email" required>
+
+                    <label for="phone">Phone number</label>
+                    <input type="tel" class="formInputTextBox" id="phone" placeholder="+447..." name="phone" pattern="[-+0-9() ]{7,}" required>
+
+                    <label for="queryMsg">Query</label>
+                    <textarea class="formInputTextBox" id="queryMsg" placeholder="Hi Gurvir, I wanted to find out about..." name="query" rows="5" required></textarea>
+
+                    <button type="submit" id="submitBtn">Submit enquiry</button>
+                </form>
             </div>
-        </a>
-</div>
+        </section>
 
-    <div class="project_display">
-        <a href="https://gurvirdhillon.github.io/art_canvas/" target="_blank">
-            <img src="img/art_canvas.png" alt="art canvas image" title="ART CANVAS!">
-            <div class="">Art Canvas!</div>
-        </div>
-        </a>
-    </div>
-
-    <div class="project_display">
-        <a href="pdf_docs/fyp_bachelors.pdf" target="_blank">
-        <img src="img/fyp_img.png" alt="" title="final year project bachelors">
-        <div class="">My final year project bachelors report</div>
-    </a>
-    </div>
-
-    <div class="project_display">
-        <a href="https://gurvirdhillon.github.io/todolist/" target="_blank">
-        <img src="img/todolist.png" alt="to do image" title="to do list">
-        <div class="">To-Do list</div>
-    </a>
-    </div>
-
-    <div class="project_display">
-        <a href="https://boxing-ring-etl.streamlit.app" target="_blank">
-        <img src="img/boxing_ring_etl.png" alt="boxing ring etl example streamlit page" title="">
-        <div class="">Boxing Ring ETL pipeline project</div>
-    </a>
-    </div>
-</section>
-
-</section>    
-
-    <section id="achieve">
-        <h1 class="childHeader">ACHIEVEMENTS</h1>
-        <img src="img/grad_pic.jpg" alt="graduate picture" id="gradPic">
-        <div>
-            <ul>Upper Second achieved in a Bachelors degree in Software Engineering at the University of Portsmouth.</ul>
-            <ul>Master's degree in Artificial Intelligence at Royal Holloway University of London.</ul>
-            <ul>Explored research into generative modelling and clustering techniques to uncover patterns in highly complex datasets </ul>
-            <ul>ATLAS approved course in NoSQL development.</ul>
-            <ul>Alumni of the common missions project scheme (Hacking4MOD) - working previously alongside the Royal Navy on a MoD large scale challenge.</ul>
-            <ul>Guest speaker at the ACCU conference 2023.</ul>
-            <ul>Was a tutor for students aged 8-10 years old for beginner level of coding.</ul>
-            <ul>Freelance web developer with over 4 years experience in software development.</ul>
-        </div>
-    </section>
-
-    <section id="skills">
-        <ul id="skills-gained">
-            
-        </ul>
-    </section>
-
-
-    <section>
-        <h2 id="enquiry">ENQUIRIES</h2>
-        <form action="/portfolio/send-email" method="post">
-            <p>First name: </p>
-            <input type="text" placeholder="first name" class="formInputTextBox" id="formFirstName" name="firstName" required>
-            <p>Last name: </p>
-            <input type="text" placeholder="last name" class="formInputTextBox" id="formSecondName" name="lastName">
-            <p>Email Address: </p>
-            <input type="email" placeholder="email address" class="formInputTextBox" id="emailInput" name="email" required>
-            <p>Phone Number:</p>
-            <input type="tel" class="formInputTextBox" id="phone" placeholder="+447_______" name="phone" pattern="[-+0-9() ]{7,}" required>
-            <p>Query: </p>
-            <input type="text" class="formInputTextBox" id="queryMsg" placeholder="Hi Gurvir, I wanted to find out about..." name="query" required>
-            <button type="submit" id="submitBtn">Submit</button>
-        </form>
-    </section>
-
-<!-- articles section for updates on career latest news etc -->
-
-<details id="updateMe">
-    <summary>Updates</summary>
-    <article class="updates">
-        <pre class="content"></pre>
-    </article>
-</details>
+        <details id="updateMe" class="content-section updates-section">
+            <summary>Updates</summary>
+            <article class="updates">
+                <pre class="content"></pre>
+            </article>
+        </details>
+    </main>
 
     <footer>
-    <a href="https://www.commonmission.uk/" target="_blank">
-        <img src="img/CMP.png" alt="hacking4mod" class="companyLogo" id="CMPLogo">
-    </a>
-    
-    <a href="https://slide.travel/" target="_blank">
-        <img src="img/slidetravel.png" alt="slide" class="companyLogo">
-    </a>
+        <div class="footer-inner">
+            <div class="logo-strip" aria-label="Affiliations and links">
+                <a href="https://www.commonmission.uk/" target="_blank">
+                    <img src="img/CMP.png" alt="hacking4mod" class="companyLogo" id="CMPLogo">
+                </a>
 
-    <a href="https://letschat.chat/" target="_blank">
-        <img src="img/letschat.png" alt="letschat.chat" class="companyLogo">
-    </a>
+                <a href="https://slide.travel/" target="_blank">
+                    <img src="img/slidetravel.png" alt="slide" class="companyLogo">
+                </a>
 
-    <img src="img/image-brand.png" alt="mockingbirdAI" class="companyLogo" id="birdLogo" title="mockingbirdAI">
+                <a href="https://letschat.chat/" target="_blank">
+                    <img src="img/letschat.png" alt="letschat.chat" class="companyLogo">
+                </a>
 
-    <a href="https://www.strava.com/athletes/54945101" target="_blank">
-        <img src="img/strava-icon.png" alt="strava" class="companyLogo" id="stravaLogo">
-    </a>
+                <button type="button" class="logo-button" aria-label="MockingBirdAI status">
+                    <img src="img/image-brand.png" alt="mockingbirdAI" class="companyLogo" id="birdLogo" title="mockingbirdAI">
+                </button>
 
-    <a href="https://liftmetrics.onrender.com/" target="_blank">
-        <img src="img/liftmetrics-logo.png" alt="liftmetrics" class="companyLogo" id="liftmetricsLogo">
-    </a>
+                <a href="https://www.strava.com/athletes/54945101" target="_blank">
+                    <img src="img/strava-icon.png" alt="strava" class="companyLogo" id="stravaLogo">
+                </a>
 
-    <a href="https://digitalfutures.com" target="_blank">
-        <img src="img/new_df_logo.jpg" alt="Digital Futures" class="companyLogo" id="df_logo">
-    </a>
+                <a href="https://liftmetrics.onrender.com/" target="_blank">
+                    <img src="img/liftmetrics-logo.png" alt="LiftMetrics" class="companyLogo" id="liftmetricsLogo">
+                </a>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p id="modalText">Coming Soon!</p>
-    </div>
-  </div>
+                <a href="https://digitalfutures.com" target="_blank">
+                    <img src="img/new_df_logo.jpg" alt="Digital Futures" class="companyLogo" id="df_logo">
+                </a>
+            </div>
 
-        <p id="tandcs">&copy; 2024 Gurvir Dhillon. All rights reserved.</p>
+            <p id="tandcs">&copy; 2024 Gurvir Dhillon. All rights reserved.</p>
+            <p class="updated-on">Updated on: <span id="datetime"></span></p>
+            <button id="admin-rights">Admin workspace</button>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <button type="button" class="close" aria-label="Close">&times;</button>
+                <p id="modalText">Coming Soon!</p>
+            </div>
+        </div>
     </footer>
-
-<button id="admin-rights">Admin workspace</button>
-
-<p>Updated on: <span id="datetime"></span></p>
-<script src="/last-updated.js" defer></script>
-
 </body>
-
-
+</html>

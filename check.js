@@ -6,9 +6,13 @@ async function handleAdminAccess() {
     }
 
     const userPassword = prompt("Enter the admin password:");
+    if (userPassword === null) {
+        window.location.href = "index.html";
+        return;
+    }
 
     try {
-        const response = await fetch('http://localhost:8080/check-password', {
+        const response = await fetch('/check-password', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json' 
@@ -36,4 +40,3 @@ async function handleAdminAccess() {
 if (window.location.pathname.includes('admin.html')) {
     window.addEventListener('load', handleAdminAccess);
 }
-
