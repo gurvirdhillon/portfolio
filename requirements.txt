@@ -89,7 +89,7 @@ pycparser==2.22
 Pygments==2.20.0
 pynndescent==0.5.13
 pyparsing==3.2.3
-pytest==8.4.2
+pytest==9.0.3
 python-dateutil==2.9.0.post0
 python-json-logger==3.2.1
 pytz==2024.2
