@@ -1,30 +1,37 @@
 async function handleAdminAccess() {
-    const userPassword = prompt("Enter the admin password:");
+    const userPassword = prompt('Enter the admin password:');
+
+    if (userPassword === null) {
+        return;
+    }
 
     try {
-        const response = await fetch('http://localhost:8080/check-password', {
+        const response = await fetch('/admin/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
+            credentials: 'same-origin',
             body: JSON.stringify({ password: userPassword })
         });
 
-        const result = await response.json();
-        console.log("Server response:", result);
-
-        if (result.success) {
-            window.location.href = "admin.html";
-        } else {
-            alert("Access Denied");
+        if (response.ok) {
+            window.location.assign('/admin');
+            return;
         }
+
+        const result = await response.json().catch(() => ({}));
+        alert(result.message || 'Access denied');
     } catch (error) {
-        console.error('Error:', error);
-        alert("An error occurred while trying to verify the password.");
+        console.error('Admin login failed:', error);
+        alert('Unable to sign in. Please try again.');
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const getButton = document.querySelector('#admin-rights');
-    getButton.addEventListener('click', handleAdminAccess);
+    const button = document.querySelector('#admin-rights');
+
+    if (button) {
+        button.addEventListener('click', handleAdminAccess);
+    }
 });
