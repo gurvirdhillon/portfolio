@@ -28,5 +28,8 @@
     "env": {
       "browser": true
     }
+  },
+  "overrides": {
+    "minimatch": "3.1.4"
   }
 }
