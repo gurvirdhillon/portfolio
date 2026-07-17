@@ -1,11 +1,12 @@
 async function handleAdminAccess() {
-    const userPassword = prompt("Enter the admin password:");
+    const userPassword = prompt('Enter the admin password:');
+
     if (userPassword === null) {
         return;
     }
 
     try {
-        const response = await fetch('/check-password', {
+        const response = await fetch('/admin/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -14,15 +15,9 @@ async function handleAdminAccess() {
             body: JSON.stringify({ password: userPassword })
         });
 
-        const result = await response.json();
-        console.log("Server response:", result);
-
-        if (result.success) {
-            localStorage.setItem('isAuthenticated', 'true');
-            window.location.href = "admin.html";
-        } else {
-            alert("Access Denied");
-            window.location.href = "index.html";
+        if (response.ok) {
+            window.location.assign('/admin');
+            return;
         }
 
         const result = await response.json().catch(() => ({}));
@@ -34,10 +29,9 @@ async function handleAdminAccess() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const getButton = document.querySelector('#admin-rights');
-    if (!getButton) {
-        return;
-    }
+    const button = document.querySelector('#admin-rights');
 
-    getButton.addEventListener('click', handleAdminAccess);
+    if (button) {
+        button.addEventListener('click', handleAdminAccess);
+    }
 });

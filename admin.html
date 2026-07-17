@@ -5,11 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration</title>
     <link rel="icon" href="img/mbird_img.png" type="png"> 
+    <link rel="stylesheet" href="admin.css">
+    <script src="admin-dashboard.js" defer></script>
 </head>
 <body>
-    <h1>Welcome Gurvir!</h1>
-    <form action="/admin/logout" method="post">
-        <button type="submit">Log out</button>
-    </form>
+    <aside class="sidebar">
+        <a class="brand" href="/admin">GD<span>.</span></a>
+        <nav aria-label="Admin navigation">
+            <button class="nav-item active" data-view="dashboard">Overview</button>
+            <button class="nav-item" data-view="projects">Projects</button>
+            <button class="nav-item" disabled>Inbox <span>Soon</span></button>
+            <button class="nav-item" disabled>Analytics <span>Soon</span></button>
+            <button class="nav-item" disabled>Site health <span>Soon</span></button>
+        </nav>
+        <form action="/admin/logout" method="post">
+            <button class="logout" type="submit">Log out</button>
+        </form>
+    </aside>
+
+    <main>
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Private workspace</p>
+                <h1>Good to see you, Gurvir.</h1>
+            </div>
+            <button class="primary" id="new-project">+ New project</button>
+        </header>
+
+        <section class="summary" aria-label="Dashboard summary">
+            <article><span>Active projects</span><strong id="active-count">0</strong></article>
+            <article><span>Average progress</span><strong id="progress-average">0%</strong></article>
+            <article><span>Unread messages</span><strong>—</strong><small>Inbox coming next</small></article>
+            <article><span>Site status</span><strong class="healthy">Online</strong><small>Server is responding</small></article>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div><p class="eyebrow">Your work</p><h2>Projects in progress</h2></div>
+                <label class="archive-filter"><input id="show-archived" type="checkbox"> Show archived</label>
+            </div>
+            <div id="project-list" class="project-list"></div>
+            <div id="empty-state" class="empty-state" hidden>
+                <h3>No projects yet</h3>
+                <p>Add what you’re working on and keep your next move visible.</p>
+                <button class="primary" id="empty-add">Add your first project</button>
+            </div>
+        </section>
+    </main>
+
+    <dialog id="project-dialog">
+        <form id="project-form">
+            <div class="dialog-heading"><h2 id="dialog-title">New project</h2><button type="button" class="icon-button" id="close-dialog" aria-label="Close">×</button></div>
+            <input type="hidden" id="project-id">
+            <label>Project name<input id="project-name" maxlength="100" required></label>
+            <label>What is it about?<textarea id="project-description" maxlength="1000" rows="3"></textarea></label>
+            <div class="form-row">
+                <label>Status<select id="project-status"><option>Idea</option><option>Planning</option><option>Building</option><option>Testing</option><option>Paused</option><option>Complete</option></select></label>
+                <label>Progress<input id="project-progress" type="number" min="0" max="100" value="0"></label>
+            </div>
+            <label>What are you working on now?<input id="project-current-task" maxlength="300"></label>
+            <label>Next step<input id="project-next-step" maxlength="300"></label>
+            <div class="form-row">
+                <label>Project link<input id="project-link" type="url" maxlength="500" placeholder="https://"></label>
+                <label>Target date<input id="project-target-date" type="date"></label>
+            </div>
+            <p id="form-error" class="form-error" role="alert"></p>
+            <div class="dialog-actions"><button type="button" class="secondary" id="cancel-dialog">Cancel</button><button type="submit" class="primary">Save project</button></div>
+        </form>
+    </dialog>
 </body>
 </html>

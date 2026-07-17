@@ -4,6 +4,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
+const fs = require('fs');
 const app = express();
 const port = Number(process.env.PORT) || 8080;
 
@@ -13,6 +14,8 @@ const MAX_LOGIN_ATTEMPTS = 5;
 const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 const sessions = new Map();
 const loginAttempts = new Map();
+const dataDirectory = path.join(__dirname, 'data');
+const projectsFile = path.join(dataDirectory, 'projects.json');
 
 app.disable('x-powered-by');
 
@@ -49,6 +52,55 @@ function requireAdmin(req, res, next) {
     return res.redirect(303, '/');
   }
   return next();
+}
+
+function requireAdminApi(req, res, next) {
+  if (!getSession(req)) {
+    return res.status(401).json({ message: 'Your admin session has expired.' });
+  }
+  return next();
+}
+
+function readProjects() {
+  try {
+    return JSON.parse(fs.readFileSync(projectsFile, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
+function writeProjects(projects) {
+  fs.mkdirSync(dataDirectory, { recursive: true });
+  const temporaryFile = `${projectsFile}.tmp`;
+  fs.writeFileSync(temporaryFile, JSON.stringify(projects, null, 2));
+  fs.renameSync(temporaryFile, projectsFile);
+}
+
+function cleanProjectInput(body) {
+  const allowedStatuses = ['Idea', 'Planning', 'Building', 'Testing', 'Paused', 'Complete'];
+  const status = allowedStatuses.includes(body.status) ? body.status : 'Idea';
+  const progress = Math.min(100, Math.max(0, Number(body.progress) || 0));
+  let link = String(body.link || '').trim().slice(0, 500);
+  if (link) {
+    try {
+      const parsedLink = new URL(link);
+      if (!['http:', 'https:'].includes(parsedLink.protocol)) link = '';
+    } catch (error) {
+      link = '';
+    }
+  }
+
+  return {
+    name: String(body.name || '').trim().slice(0, 100),
+    description: String(body.description || '').trim().slice(0, 1000),
+    status,
+    progress,
+    currentTask: String(body.currentTask || '').trim().slice(0, 300),
+    nextStep: String(body.nextStep || '').trim().slice(0, 300),
+    link,
+    targetDate: String(body.targetDate || '').trim().slice(0, 10)
+  };
 }
 
 function passwordMatches(password) {
@@ -128,10 +180,66 @@ app.get(['/admin', '/admin.html'], requireAdmin, (req, res) => {
   return res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
+app.get('/api/admin/projects', requireAdminApi, (req, res) => {
+  return res.json(readProjects());
+});
+
+app.post('/api/admin/projects', requireAdminApi, (req, res) => {
+  const input = cleanProjectInput(req.body);
+  if (!input.name) return res.status(400).json({ message: 'Project name is required.' });
+
+  const projects = readProjects();
+  const now = new Date().toISOString();
+  const project = {
+    id: crypto.randomUUID(),
+    ...input,
+    archived: false,
+    order: projects.length,
+    createdAt: now,
+    updatedAt: now
+  };
+  projects.push(project);
+  writeProjects(projects);
+  return res.status(201).json(project);
+});
+
+app.put('/api/admin/projects/:id', requireAdminApi, (req, res) => {
+  const projects = readProjects();
+  const project = projects.find((item) => item.id === req.params.id);
+  if (!project) return res.status(404).json({ message: 'Project not found.' });
+
+  const input = cleanProjectInput(req.body);
+  if (!input.name) return res.status(400).json({ message: 'Project name is required.' });
+  Object.assign(project, input, { updatedAt: new Date().toISOString() });
+  writeProjects(projects);
+  return res.json(project);
+});
+
+app.patch('/api/admin/projects/:id/archive', requireAdminApi, (req, res) => {
+  const projects = readProjects();
+  const project = projects.find((item) => item.id === req.params.id);
+  if (!project) return res.status(404).json({ message: 'Project not found.' });
+  project.archived = Boolean(req.body.archived);
+  project.updatedAt = new Date().toISOString();
+  writeProjects(projects);
+  return res.json(project);
+});
+
+app.patch('/api/admin/projects/reorder', requireAdminApi, (req, res) => {
+  const ids = Array.isArray(req.body.ids) ? req.body.ids : [];
+  const projects = readProjects();
+  const orderById = new Map(ids.map((id, index) => [id, index]));
+  projects.forEach((project) => {
+    if (orderById.has(project.id)) project.order = orderById.get(project.id);
+  });
+  writeProjects(projects);
+  return res.json({ success: true });
+});
+
 // Publish only the files the public site needs. This avoids exposing server
 // source, configuration, and admin files by serving the whole project folder.
 app.get(['/', '/index.html'], (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
-for (const publicFile of ['index.css', 'index.js', 'admin.js']) {
+for (const publicFile of ['index.css', 'index.js', 'admin.js', 'admin.css', 'admin-dashboard.js']) {
   app.get(`/${publicFile}`, (req, res) => res.sendFile(path.join(__dirname, publicFile)));
 }
 app.use('/img', express.static(path.join(__dirname, 'img')));

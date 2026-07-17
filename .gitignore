@@ -3,5 +3,7 @@ node_modules
 package-lock.json
 yml
 .env
+data/projects.json
+data/projects.json.tmp
 .venv
 .DS_store
