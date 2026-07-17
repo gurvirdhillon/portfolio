@@ -16,6 +16,7 @@ const sessions = new Map();
 const loginAttempts = new Map();
 const dataDirectory = path.join(__dirname, 'data');
 const projectsFile = path.join(dataDirectory, 'projects.json');
+const notesFile = path.join(dataDirectory, 'notes.json');
 
 app.disable('x-powered-by');
 
@@ -75,6 +76,60 @@ function writeProjects(projects) {
   const temporaryFile = `${projectsFile}.tmp`;
   fs.writeFileSync(temporaryFile, JSON.stringify(projects, null, 2));
   fs.renameSync(temporaryFile, projectsFile);
+}
+
+function readNotes() {
+  try {
+    return JSON.parse(fs.readFileSync(notesFile, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
+function writeNotes(notes) {
+  fs.mkdirSync(dataDirectory, { recursive: true });
+  const temporaryFile = `${notesFile}.tmp`;
+  fs.writeFileSync(temporaryFile, JSON.stringify(notes, null, 2));
+  fs.renameSync(temporaryFile, notesFile);
+}
+
+function cleanNoteInput(body) {
+  return {
+    title: String(body.title || '').trim().slice(0, 120),
+    content: String(body.content || '').trim().slice(0, 10000),
+    tag: String(body.tag || '').trim().slice(0, 30)
+  };
+}
+
+function runHealthChecks() {
+  const checks = [];
+  const addCheck = (id, label, status, detail) => checks.push({ id, label, status, detail });
+  addCheck('server', 'Web server', 'healthy', `Running on ${process.version}.`);
+
+  try {
+    fs.mkdirSync(dataDirectory, { recursive: true });
+    fs.accessSync(dataDirectory, fs.constants.R_OK | fs.constants.W_OK);
+    addCheck('storage', 'Private storage', 'healthy', 'Project and note storage is readable and writable.');
+  } catch (error) {
+    addCheck('storage', 'Private storage', 'error', 'The data directory cannot be read or written.');
+  }
+
+  if (process.env.ADMIN_PASSWORD_HASH) addCheck('authentication', 'Admin authentication', 'healthy', 'A hashed admin password is configured.');
+  else if (process.env.ADMIN_PASSWORD) addCheck('authentication', 'Admin authentication', 'warning', 'Using the legacy plaintext password setting.');
+  else addCheck('authentication', 'Admin authentication', 'error', 'No admin password is configured.');
+
+  addCheck('email', 'Contact email', process.env.EMAIL_PASSWORD ? 'healthy' : 'warning', process.env.EMAIL_PASSWORD ? 'Email credentials are configured.' : 'EMAIL_PASSWORD is missing; contact emails will fail.');
+
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const references = [...html.matchAll(/(?:src|href)=["']([^"']+)["']/gi)]
+    .map((match) => match[1].split('#')[0].split('?')[0])
+    .filter((reference) => reference && !/^(?:https?:|mailto:|tel:|#|javascript:)/i.test(reference));
+  const missing = [...new Set(references)].filter((reference) => !fs.existsSync(path.join(__dirname, decodeURIComponent(reference))));
+  addCheck('assets', 'Portfolio files', missing.length ? 'error' : 'healthy', missing.length ? `${missing.length} missing: ${missing.slice(0, 4).join(', ')}` : `${new Set(references).size} local links and assets found.`);
+
+  const overall = checks.some((check) => check.status === 'error') ? 'error' : checks.some((check) => check.status === 'warning') ? 'warning' : 'healthy';
+  return { overall, checkedAt: new Date().toISOString(), uptimeSeconds: Math.floor(process.uptime()), checks };
 }
 
 function cleanProjectInput(body) {
@@ -235,6 +290,53 @@ app.patch('/api/admin/projects/reorder', requireAdminApi, (req, res) => {
   writeProjects(projects);
   return res.json({ success: true });
 });
+
+app.get('/api/admin/notes', requireAdminApi, (req, res) => {
+  return res.json(readNotes());
+});
+
+app.post('/api/admin/notes', requireAdminApi, (req, res) => {
+  const input = cleanNoteInput(req.body);
+  if (!input.title && !input.content) return res.status(400).json({ message: 'Write something before saving.' });
+  const notes = readNotes();
+  const now = new Date().toISOString();
+  const note = { id: crypto.randomUUID(), ...input, pinned: false, createdAt: now, updatedAt: now };
+  notes.push(note);
+  writeNotes(notes);
+  return res.status(201).json(note);
+});
+
+app.put('/api/admin/notes/:id', requireAdminApi, (req, res) => {
+  const notes = readNotes();
+  const note = notes.find((item) => item.id === req.params.id);
+  if (!note) return res.status(404).json({ message: 'Note not found.' });
+  const input = cleanNoteInput(req.body);
+  if (!input.title && !input.content) return res.status(400).json({ message: 'Write something before saving.' });
+  Object.assign(note, input, { updatedAt: new Date().toISOString() });
+  writeNotes(notes);
+  return res.json(note);
+});
+
+app.patch('/api/admin/notes/:id/pin', requireAdminApi, (req, res) => {
+  const notes = readNotes();
+  const note = notes.find((item) => item.id === req.params.id);
+  if (!note) return res.status(404).json({ message: 'Note not found.' });
+  note.pinned = Boolean(req.body.pinned);
+  note.updatedAt = new Date().toISOString();
+  writeNotes(notes);
+  return res.json(note);
+});
+
+app.delete('/api/admin/notes/:id', requireAdminApi, (req, res) => {
+  const notes = readNotes();
+  const remainingNotes = notes.filter((item) => item.id !== req.params.id);
+  if (remainingNotes.length === notes.length) return res.status(404).json({ message: 'Note not found.' });
+  writeNotes(remainingNotes);
+  return res.status(204).end();
+});
+
+app.get('/api/admin/health', requireAdminApi, (req, res) => res.json(runHealthChecks()));
+app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.floor(process.uptime()) }));
 
 // Publish only the files the public site needs. This avoids exposing server
 // source, configuration, and admin files by serving the whole project folder.

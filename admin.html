@@ -14,9 +14,10 @@
         <nav aria-label="Admin navigation">
             <button class="nav-item active" data-view="dashboard">Overview</button>
             <button class="nav-item" data-view="projects">Projects</button>
+            <button class="nav-item" data-view="notes">Notes</button>
             <button class="nav-item" disabled>Inbox <span>Soon</span></button>
             <button class="nav-item" disabled>Analytics <span>Soon</span></button>
-            <button class="nav-item" disabled>Site health <span>Soon</span></button>
+            <button class="nav-item" data-view="health">Site health</button>
         </nav>
         <form action="/admin/logout" method="post">
             <button class="logout" type="submit">Log out</button>
@@ -32,6 +33,7 @@
             <button class="primary" id="new-project">+ New project</button>
         </header>
 
+        <div id="dashboard-view" class="admin-view">
         <section class="summary" aria-label="Dashboard summary">
             <article><span>Active projects</span><strong id="active-count">0</strong></article>
             <article><span>Average progress</span><strong id="progress-average">0%</strong></article>
@@ -50,6 +52,52 @@
                 <p>Add what you’re working on and keep your next move visible.</p>
                 <button class="primary" id="empty-add">Add your first project</button>
             </div>
+        </section>
+        </div>
+
+        <section id="notes-view" class="admin-view" hidden>
+            <div class="notes-toolbar">
+                <div><p class="eyebrow">Private notebook</p><h2>Notes</h2></div>
+                <div class="notes-tools"><input id="note-search" type="search" placeholder="Search notes…" aria-label="Search notes"><button class="primary" id="new-note">+ New document</button></div>
+            </div>
+            <div class="document-workspace">
+                <aside class="document-list-panel">
+                    <div id="notes-list" class="notes-list"></div>
+                    <div id="notes-empty" class="notes-list-empty"><p>No documents yet.</p></div>
+                </aside>
+                <article class="document-editor">
+                    <div id="editor-empty" class="editor-empty"><h3>Your notebook is empty</h3><p>Create a document and start writing.</p><button class="primary" id="empty-note-add">Create document</button></div>
+                    <div id="editor-area" hidden>
+                        <div class="document-meta">
+                            <input id="editor-title" class="editor-title" maxlength="120" placeholder="Untitled document">
+                            <input id="editor-tag" class="editor-tag" maxlength="30" placeholder="Add a tag">
+                        </div>
+                        <div class="format-toolbar" aria-label="Formatting toolbar">
+                            <button type="button" data-command="undo" title="Undo">↶</button><button type="button" data-command="redo" title="Redo">↷</button>
+                            <span></span>
+                            <select id="block-format" aria-label="Text style"><option value="p">Normal text</option><option value="h1">Heading 1</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option></select>
+                            <button type="button" data-command="bold" title="Bold"><strong>B</strong></button><button type="button" data-command="italic" title="Italic"><em>I</em></button><button type="button" data-command="underline" title="Underline"><u>U</u></button>
+                            <span></span>
+                            <button type="button" data-command="insertUnorderedList" title="Bullet list">• List</button><button type="button" data-command="insertOrderedList" title="Numbered list">1. List</button><button type="button" id="add-link" title="Add link">Link</button>
+                        </div>
+                        <div id="note-editor" class="writing-page" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Start writing…"></div>
+                        <footer class="editor-footer"><span id="save-status">Saved</span><span id="word-count">0 words</span><button class="secondary" id="pin-note" type="button">Pin</button><button class="danger-button" id="delete-note" type="button">Delete</button></footer>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="health-view" class="admin-view" hidden>
+            <div class="health-heading">
+                <div><p class="eyebrow">System diagnostics</p><h2>Site health</h2><p>Live checks for the services and files your portfolio depends on.</p></div>
+                <button class="primary" id="run-health-checks">Run checks</button>
+            </div>
+            <article class="health-overview">
+                <div id="health-orb" class="health-orb pending">…</div>
+                <div><span class="health-label">Overall status</span><h3 id="health-status">Not checked</h3><p id="health-checked-at">Run the checks to inspect your site.</p></div>
+                <div class="uptime"><span>Server uptime</span><strong id="health-uptime">—</strong></div>
+            </article>
+            <div id="health-check-list" class="health-check-list"></div>
         </section>
     </main>
 
@@ -73,5 +121,6 @@
             <div class="dialog-actions"><button type="button" class="secondary" id="cancel-dialog">Cancel</button><button type="submit" class="primary">Save project</button></div>
         </form>
     </dialog>
+
 </body>
 </html>

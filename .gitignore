@@ -5,5 +5,7 @@ yml
 .env
 data/projects.json
 data/projects.json.tmp
+data/notes.json
+data/notes.json.tmp
 .venv
 .DS_store
