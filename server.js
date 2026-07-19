@@ -5,15 +5,13 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const fs = require('fs');
+const { rateLimit } = require('express-rate-limit');
 const app = express();
 const port = Number(process.env.PORT) || 8080;
 
 const SESSION_COOKIE = 'portfolio_admin_session';
 const SESSION_TTL_MS = 2 * 60 * 60 * 1000;
-const MAX_LOGIN_ATTEMPTS = 5;
-const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 const sessions = new Map();
-const loginAttempts = new Map();
 const dataDirectory = path.join(__dirname, 'data');
 const projectsFile = path.join(dataDirectory, 'projects.json');
 const notesFile = path.join(dataDirectory, 'notes.json');
@@ -22,6 +20,30 @@ app.disable('x-powered-by');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 300,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: 'Too many requests. Please try again later.'
+}));
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  skipSuccessfulRequests: true,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: { message: 'Too many attempts. Try again in 15 minutes.' }
+});
+
+const emailLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 5,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: 'Too many messages sent. Please try again later.'
+});
 
 function getCookies(req) {
   return (req.headers.cookie || '').split(';').reduce((cookies, item) => {
@@ -183,34 +205,12 @@ function passwordMatches(password) {
   return expected.length === actual.length && crypto.timingSafeEqual(expected, actual);
 }
 
-function isRateLimited(ip) {
-  const now = Date.now();
-  const record = loginAttempts.get(ip);
-  if (!record || record.startedAt + LOGIN_WINDOW_MS <= now) {
-    loginAttempts.set(ip, { count: 0, startedAt: now });
-    return false;
-  }
-  return record.count >= MAX_LOGIN_ATTEMPTS;
-}
-
-function recordFailedLogin(ip) {
-  const record = loginAttempts.get(ip);
-  if (record) record.count += 1;
-}
-
-app.post('/admin/login', (req, res) => {
-  const ip = req.ip;
-  if (isRateLimited(ip)) {
-    return res.status(429).json({ message: 'Too many attempts. Try again in 15 minutes.' });
-  }
-
+app.post('/admin/login', loginLimiter, (req, res) => {
   const password = typeof req.body.password === 'string' ? req.body.password : '';
   if (!passwordMatches(password)) {
-    recordFailedLogin(ip);
     return res.status(401).json({ message: 'Incorrect password.' });
   }
 
-  loginAttempts.delete(ip);
   const token = crypto.randomBytes(32).toString('hex');
   sessions.set(token, { expiresAt: Date.now() + SESSION_TTL_MS });
   res.cookie(SESSION_COOKIE, token, {
@@ -349,7 +349,7 @@ app.use('/pdf_docs', express.static(path.join(__dirname, 'pdf_docs')));
 app.use('/updates', express.static(path.join(__dirname, 'updates')));
 
 // Email sending
-app.post('/portfolio/send-email', (req, res) => {
+app.post('/portfolio/send-email', emailLimiter, (req, res) => {
   const { firstName, lastName, email, phone, query } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -379,14 +379,11 @@ app.post('/portfolio/send-email', (req, res) => {
   });
 });
 
-// Remove expired sessions and rate-limit records without keeping Node running.
+// Remove expired sessions without keeping Node running.
 const cleanupTimer = setInterval(() => {
   const now = Date.now();
   for (const [token, session] of sessions) {
     if (session.expiresAt <= now) sessions.delete(token);
-  }
-  for (const [ip, attempt] of loginAttempts) {
-    if (attempt.startedAt + LOGIN_WINDOW_MS <= now) loginAttempts.delete(ip);
   }
 }, 10 * 60 * 1000);
 cleanupTimer.unref();
